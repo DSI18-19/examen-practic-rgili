@@ -33,6 +33,7 @@ public class UserUseCases {
         int logger_result = userClient.comunicateCreateUser();
         if(logger_result == -1)
             System.out.println("Error comunicating the creation to the logger");
+
         return userLabDAO.insert(userLab);
     }
 

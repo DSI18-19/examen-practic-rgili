@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,5 +43,6 @@ public class UserRESTController {
     public int deleteUser(@PathVariable String username) {
         return userUseCases.deleteUser(username);
     }
+
 
 }
