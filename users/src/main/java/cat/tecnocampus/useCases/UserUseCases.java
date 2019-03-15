@@ -3,6 +3,7 @@ package cat.tecnocampus.useCases;
 import cat.tecnocampus.domain.UserLab;
 import cat.tecnocampus.messaging.MessageSender;
 import cat.tecnocampus.persistence.UserLabDAO;
+import cat.tecnocampus.userClient.UserClient;
 import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,12 @@ public class UserUseCases {
 
     private final UserLabDAO userLabDAO;
     private final MessageSender messageSender;
+    private UserClient userClient;
 
-    public UserUseCases(UserLabDAO UserLabDAO, MessageSender messageSender) {
+    public UserUseCases(UserLabDAO UserLabDAO, MessageSender messageSender, UserClient userClient) {
         this.userLabDAO = UserLabDAO;
         this.messageSender = messageSender;
+        this.userClient = userClient;
     }
 
     public UserLab createUser(String username, String name, String secondName, String email) {
@@ -27,7 +30,9 @@ public class UserUseCases {
 
     public int registerUser(UserLab userLab) {
         //TODO: escriu un missatge síncron al Logger. "Creat user: userName". Si communicació tallada s'ha d'escriure un missatge a pantalla local
-
+        int logger_result = userClient.comunicateCreateUser();
+        if(logger_result == -1)
+            System.out.println("Error comunicating the creation to the logger");
         return userLabDAO.insert(userLab);
     }
 
@@ -35,6 +40,10 @@ public class UserUseCases {
         //TODO: escriu un missatge síncron al Logger. "Esborrat user: userName". Si communicació tallada s'ha d'escriure un missatge a pantalla local
         int result = userLabDAO.delete(username);
         if (result > 0) messageSender.sendDeleteNotes(username);
+
+        int logger_result = userClient.comunicateDeleteUser(username);
+        if(logger_result == -2)
+            System.out.println("Error comunicating the remove to the logger");
 
         return result;
     }
