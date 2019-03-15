@@ -58,7 +58,12 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-javanica</artifactId>
+            <version>1.5.18</version>
+        </dependency>
+    </dependencies>
 
 	<dependencyManagement>
 		<dependencies>
