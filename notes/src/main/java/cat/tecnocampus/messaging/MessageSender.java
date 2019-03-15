@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 @Component
 @EnableBinding(NotesSenderChannels.class)
 public class MessageSender {
-    private MessageChannel notesChannel;
+    private MessageChannel loggerChannel;
 
     public MessageSender(NotesSenderChannels channels) {
-        this.notesChannel = channels.senderNotesChannel();
+        this.loggerChannel = channels.senderLoggerChannel();
     }
 
     public void sendInformation(String message) {
-        notesChannel.send(MessageBuilder.withPayload(message).build());
+        loggerChannel.send(MessageBuilder.withPayload(message).build());
 
     }
 }

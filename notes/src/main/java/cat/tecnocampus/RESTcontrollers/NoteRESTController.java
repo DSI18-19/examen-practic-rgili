@@ -59,10 +59,4 @@ public class NoteRESTController {
         notesUseCases.deleteUserNote(id, username);
     }
 
-
-    @GetMapping("MissatgeServer/{missatge}")
-    public String enviarMissatge(@PathVariable String missatge){
-        messageSender.sendInformation(missatge);
-        return missatge;
-    }
 }

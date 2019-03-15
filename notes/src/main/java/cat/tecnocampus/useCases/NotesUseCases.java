@@ -47,7 +47,8 @@ public class NotesUseCases {
 
     public int deleteUserNotes(String username) {
         //TODO: escriu un missatge assíncron al Logger. "esborrades les notes de: username"
-        messageSender.sendInformation("esborrades les notes de: "+username);
+        if(username != null){}
+            messageSender.sendInformation("esborrades les notes de: "+username);
         return noteLabDAO.deleteUserNotes(username);
     }
 

@@ -5,8 +5,8 @@ import org.springframework.messaging.MessageChannel;
 
 public interface NotesSenderChannels {
 
-    String NOTES_CHANNEL = "senderNotesChannel";
+    String LOGGER_CHANNEL = "senderLoggerChannel";
 
-    @Output(NOTES_CHANNEL)
-    MessageChannel senderNotesChannel();
+    @Output(LOGGER_CHANNEL)
+    MessageChannel senderLoggerChannel();
 }
