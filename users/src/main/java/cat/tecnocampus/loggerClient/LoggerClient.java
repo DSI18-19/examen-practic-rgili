@@ -1,11 +1,11 @@
-package cat.tecnocampus.userClient;
+package cat.tecnocampus.loggerClient;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
-public class UserClient {
+public class LoggerClient {
 
     private static RestTemplate restTemplate;
 

@@ -1,7 +1,11 @@
 package cat.tecnocampus.RESTcontrollers;
 
 import cat.tecnocampus.domain.NoteLab;
+import cat.tecnocampus.messaging.MessageSender;
 import cat.tecnocampus.useCases.NotesUseCases;
+import com.netflix.discovery.converters.Auto;
+import org.aspectj.bridge.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +16,8 @@ import java.util.List;
 public class NoteRESTController {
 
     private NotesUseCases notesUseCases;
+    @Autowired
+    private MessageSender messageSender;
 
     public NoteRESTController(NotesUseCases notesUseCases) {
         this.notesUseCases = notesUseCases;
@@ -51,5 +57,12 @@ public class NoteRESTController {
     @DeleteMapping(value = "/{username}/{id}")
     public void deleteNoteId(@PathVariable String username, @PathVariable Long id) {
         notesUseCases.deleteUserNote(id, username);
+    }
+
+
+    @GetMapping("MissatgeServer/{missatge}")
+    public String enviarMissatge(@PathVariable String missatge){
+        messageSender.sendInformation(missatge);
+        return missatge;
     }
 }
