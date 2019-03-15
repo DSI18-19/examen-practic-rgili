@@ -41,14 +41,13 @@ public class NotesUseCases {
 
     public int deleteUserNote(Long id, String username) {
         //TODO: escriu un missatge assíncron al Logger. "esborrada nota: id"
-        messageSender.sendInformation("esborrada nota: "+id);
+        messageSender.sendInformation("esborrada nota: "+id+" de l'usuari: "+username);
         return noteLabDAO.deleteNote(id, username);
     }
 
     public int deleteUserNotes(String username) {
         //TODO: escriu un missatge assíncron al Logger. "esborrades les notes de: username"
-        if(username != null){}
-            messageSender.sendInformation("esborrades les notes de: "+username);
+        messageSender.sendInformation("esborrades les notes de l'usuari: "+username);
         return noteLabDAO.deleteUserNotes(username);
     }
 

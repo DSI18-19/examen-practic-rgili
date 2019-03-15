@@ -16,7 +16,7 @@ public class MessagingLogger {
 
     @StreamListener(ReceiverChannels.LOGGER_CHANNEL)
     public void notesReceiver(Object payload) {
-        log.info("Time Received: " + payload);
+        log.info(payload);
     }
 
 }
