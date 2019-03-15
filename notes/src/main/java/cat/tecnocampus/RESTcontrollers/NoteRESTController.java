@@ -16,8 +16,6 @@ import java.util.List;
 public class NoteRESTController {
 
     private NotesUseCases notesUseCases;
-    @Autowired
-    private MessageSender messageSender;
 
     public NoteRESTController(NotesUseCases notesUseCases) {
         this.notesUseCases = notesUseCases;
