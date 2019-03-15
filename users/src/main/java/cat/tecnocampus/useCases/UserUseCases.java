@@ -39,11 +39,12 @@ public class UserUseCases {
     public int deleteUser(String username) {
         //TODO: escriu un missatge síncron al Logger. "Esborrat user: userName". Si communicació tallada s'ha d'escriure un missatge a pantalla local
         int result = userLabDAO.delete(username);
-        if (result > 0) messageSender.sendDeleteNotes(username);
-
-        int logger_result = loggerClient.comunicateDeleteUser(username);
-        if(logger_result == loggerClient.DELETE_COMMUNICATION_FAIL)
-            System.out.println("Error comunicating the remove to the logger");
+        if (result > 0) {
+            messageSender.sendDeleteNotes(username);
+            int logger_result = loggerClient.comunicateDeleteUser(username);
+            if(logger_result == loggerClient.DELETE_COMMUNICATION_FAIL)
+                System.out.println("Error comunicating the remove to the logger");
+        }
 
         return result;
     }
