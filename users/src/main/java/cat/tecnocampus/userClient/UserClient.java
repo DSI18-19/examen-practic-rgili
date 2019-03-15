@@ -12,28 +12,33 @@ public class UserClient {
     private static final String URL_DELETE_USER ="http://localhost:8081/usersDelete/";
     private static final String URL_CREATE_USER ="http://localhost:8081/usersCreate";
 
+    public static final int CREATE_COMMUNICATION_SUCCESS = 1;
+    public static final int DELETE_COMMUNICATION_SUCCESS = 2;
+    public static final int CREATE_COMMUNICATION_FAIL = -1;
+    public static final int DELETE_COMMUNICATION_FAIL = -2;
+
     @HystrixCommand(fallbackMethod = "loggerDeleteConnectionLost")
     public int comunicateDeleteUser(String username){
         String consulta = URL_DELETE_USER + username;
         restTemplate = new RestTemplate();
         restTemplate.getForObject(consulta, String.class);
-        return 2;
+        return DELETE_COMMUNICATION_SUCCESS;
     }
 
 
     public int loggerDeleteConnectionLost(){
-        return -2;
+        return DELETE_COMMUNICATION_FAIL;
     }
 
     @HystrixCommand(fallbackMethod = "loggerCreateConnectionLost")
     public int comunicateCreateUser(){
         restTemplate = new RestTemplate();
         restTemplate.getForObject(URL_CREATE_USER, String.class);
-        return 1;
+        return CREATE_COMMUNICATION_SUCCESS;
     }
 
     public int loggerCreateConnectionLost(){
-        return -1;
+        return CREATE_COMMUNICATION_FAIL;
     }
 
 }

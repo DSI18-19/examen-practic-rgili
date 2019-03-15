@@ -31,7 +31,7 @@ public class UserUseCases {
     public int registerUser(UserLab userLab) {
         //TODO: escriu un missatge síncron al Logger. "Creat user: userName". Si communicació tallada s'ha d'escriure un missatge a pantalla local
         int logger_result = userClient.comunicateCreateUser();
-        if(logger_result == -1)
+        if(logger_result == userClient.CREATE_COMMUNICATION_FAIL)
             System.out.println("Error comunicating the creation to the logger");
 
         return userLabDAO.insert(userLab);
@@ -43,7 +43,7 @@ public class UserUseCases {
         if (result > 0) messageSender.sendDeleteNotes(username);
 
         int logger_result = userClient.comunicateDeleteUser(username);
-        if(logger_result == -2)
+        if(logger_result == userClient.DELETE_COMMUNICATION_FAIL)
             System.out.println("Error comunicating the remove to the logger");
 
         return result;
